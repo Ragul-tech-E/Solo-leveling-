@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Solo Leveling | The System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --system-blue: #00f2ff;
+            --system-blue-glow: rgba(0, 242, 255, 0.6);
+            --system-bg: #010c14;
+            --system-red: #ff003c;
+        }
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--system-bg);
+            color: #d1f7ff;
+            margin: 0;
+            overflow: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .font-rpg {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .system-frame {
+            background: rgba(1, 15, 25, 0.2);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1.5px solid rgba(0, 242, 255, 0.3);
+            box-shadow: inset 0 0 25px rgba(0, 242, 255, 0.1), 0 10px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px var(--system-blue-glow), 0 0 20px rgba(0, 242, 255, 0.3);
+        }
+        .glow-text-red {
+            text-shadow: 0 0 10px rgba(255, 0, 60, 0.8), 0 0 20px rgba(255, 0, 60, 0.4);
+        }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 1000;
+            background: linear-gradient(0deg, rgba(0, 242, 255, 0) 0%, rgba(0, 242, 255, 0.05) 50%, rgba(0, 242, 255, 0) 100%);
+            position: fixed;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+        .glitch-anim {
+            animation: glitch 1s linear infinite;
+        }
+        @keyframes glitch {
+          2%, 64% { transform: translate(2px,0) skew(0deg); }
+          4%, 60% { transform: translate(-2px,0) skew(0deg); }
+          62% { transform: translate(0,0) skew(5deg); }
+        }
+        @keyframes pulse-red {
+            0%, 100% { background-color: rgba(255, 0, 60, 0.05); }
+            50% { background-color: rgba(255, 0, 60, 0.12); }
+        }
+        .animate-pulse-red {
+            animation: pulse-red 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes popup-enter {
+            from { transform: translateY(100vh); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes popup-exit {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+        .animate-popup-enter {
+            animation: popup-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-popup-exit {
+            animation: popup-exit 0.5s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+        }
+
+        .scroll-container::-webkit-scrollbar { width: 4px; }
+        .scroll-container::-webkit-scrollbar-thumb { background: var(--system-blue); }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "recharts": "https://esm.sh/recharts@^3.6.0"
+  }
+}
+</script>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('The System: Registered', reg.scope))
+            .catch(err => console.warn('The System: SW Registration failed:', err));
+        });
+      }
+    </script>
+</body>
+</html>

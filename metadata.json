@@ -1,0 +1,8 @@
+{
+  "name": "Solo Leveling Workout Tracker",
+  "description": "An RPG-themed fitness tracker inspired by Solo Leveling. Level up your real life by tracking workouts, earning XP, and rising through the ranks from Ordinary to Grandmaster.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
